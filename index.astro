@@ -1,0 +1,10 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro"; import "../../styles/global.css";
+---
+<MainLayout title="All Games" description="Browse GameToolHub tools by game.">
+<section class="page-hero container"><span class="pill">GAME DIRECTORY</span><h1>Choose your <span class="gradient-text">game.</span></h1><p class="lead" style="margin:0">Browse calculators and helpful utilities by game.</p></section>
+<section class="section container grid two">
+<a class="card" href="/games/palworld/"><div class="card-icon">🧬</div><h3>Palworld</h3><p>Breeding planner and type matchup reference.</p><span class="card-link">View Palworld →</span></a>
+<a class="card" href="/games/minecraft/"><div class="card-icon">⛏️</div><h3>Minecraft</h3><p>Nether coordinates, XP and crafting tools.</p><span class="card-link">View Minecraft →</span></a>
+</section>
+</MainLayout>

@@ -1,0 +1,23 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro"; import "../../styles/global.css";
+---
+<MainLayout title="Minecraft Nether Coordinate Calculator" description="Convert Minecraft Overworld and Nether X and Z coordinates using the 8 to 1 scale.">
+<section class="page-hero container"><span class="pill">MINECRAFT TOOL</span><h1>Nether Coordinate <span class="gradient-text">Calculator.</span></h1><p class="lead" style="margin:0">Convert X and Z coordinates between the Overworld and Nether.</p></section>
+<section class="tool-shell">
+<h2>Coordinate converter</h2>
+<div class="field"><label for="direction">Conversion direction</label><select id="direction"><option value="to-nether">Overworld → Nether</option><option value="to-overworld">Nether → Overworld</option></select></div>
+<div class="form-row"><div class="field"><label for="coord-x">X coordinate</label><input id="coord-x" type="number" step="any" placeholder="e.g. 800"/></div><div class="field"><label for="coord-z">Z coordinate</label><input id="coord-z" type="number" step="any" placeholder="e.g. -240"/></div></div>
+<button class="button" id="convert">Convert coordinates</button>
+<div id="coord-result" class="result hidden" aria-live="polite"></div>
+<p class="muted" style="font-size:13px">The standard horizontal coordinate scale is 8:1. Y is not converted by this calculator. Portal placement and linking can also depend on nearby portals and valid placement space.</p>
+</section>
+<script>
+  document.querySelector("#convert")?.addEventListener("click",()=>{
+    const x=Number(document.querySelector("#coord-x").value),z=Number(document.querySelector("#coord-z").value),dir=document.querySelector("#direction").value,out=document.querySelector("#coord-result");
+    if(document.querySelector("#coord-x").value===""||document.querySelector("#coord-z").value===""||!Number.isFinite(x)||!Number.isFinite(z)){out.textContent="Enter valid X and Z coordinates.";out.classList.remove("hidden");return;}
+    const factor=dir==="to-nether"?8:1/8, label=dir==="to-nether"?"Nether":"Overworld";
+    out.innerHTML=`<strong>${label} coordinates</strong><br>X: ${Math.round(x/factor*100)/100}<br>Z: ${Math.round(z/factor*100)/100}`;
+    out.classList.remove("hidden");
+  });
+</script>
+</MainLayout>

@@ -1,0 +1,19 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro"; import "../../styles/global.css";
+---
+<MainLayout title="Minecraft Crafting Helper" description="A quick reference for common Minecraft starter crafting recipes.">
+<section class="page-hero container"><span class="pill">MINECRAFT TOOL</span><h1>Crafting <span class="gradient-text">Helper.</span></h1><p class="lead" style="margin:0">Look up a starter collection of common crafting recipes.</p></section>
+<section class="tool-shell">
+<h2>Recipe lookup</h2>
+<div class="field"><label for="recipe-search">Search recipe</label><input id="recipe-search" type="search" placeholder="Try torch, chest, crafting table..."/></div>
+<div class="table-wrap"><table><thead><tr><th>Output</th><th>Ingredients</th><th>Notes</th></tr></thead><tbody id="recipe-list"></tbody></table></div>
+<p class="muted" style="font-size:13px">Starter recipes only. Recipe availability can vary by edition and version; check your in-game recipe book for the current recipe.</p>
+</section>
+<script>
+const recipes=[
+["Crafting Table","4 × Any Planks","2×2 crafting grid"],["Chest","8 × Any Planks","Leave center slot empty"],["Torch","1 × Coal or Charcoal; 1 × Stick","Vertical arrangement"],["Stick","2 × Any Planks","Vertical arrangement"],["Furnace","8 × Cobblestone or eligible stone","Leave center slot empty"],["Paper","3 × Sugar Cane","Three in a horizontal row"],["Bread","3 × Wheat","Three in a horizontal row"],["Ladder","7 × Sticks","H-shaped arrangement"],["Glass","Sand; fuel","Smelt in a furnace"]];
+const body=document.querySelector("#recipe-list"),search=document.querySelector("#recipe-search");
+function render(){const q=search.value.toLowerCase();const rows=recipes.filter(r=>r.join(" ").toLowerCase().includes(q));body.innerHTML=rows.length?rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join(""):`<tr><td colspan="3">No matching starter recipe found.</td></tr>`;}
+search.addEventListener("input",render);render();
+</script>
+</MainLayout>

@@ -1,0 +1,20 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro"; import "../../styles/global.css";
+---
+<MainLayout title="Palworld Type Matchup" description="Compare Palworld element types with an editable matchup reference.">
+<section class="page-hero container"><span class="pill">PALWORLD TOOL</span><h1>Palworld Type <span class="gradient-text">Matchup.</span></h1><p class="lead" style="margin:0">Compare a selected attacking type with a defending type.</p></section>
+<section class="tool-shell">
+<h2>Type matchup checker</h2>
+<div class="notice">The matchup table below is a starter reference and should be verified against the current game version before relying on it competitively.</div>
+<div class="form-row">
+<div class="field"><label for="attack-type">Attacking type</label><select id="attack-type"><option>Fire</option><option>Water</option><option>Grass</option><option>Electric</option><option>Ground</option><option>Ice</option><option>Dragon</option><option>Dark</option><option>Neutral</option></select></div>
+<div class="field"><label for="defend-type">Defending type</label><select id="defend-type"><option>Grass</option><option>Fire</option><option>Water</option><option>Electric</option><option>Ground</option><option>Ice</option><option>Dragon</option><option>Dark</option><option>Neutral</option></select></div>
+</div>
+<button class="button" id="check-matchup">Check matchup</button><div id="match-result" class="result" aria-live="polite">Choose types and check the matchup. Verify game balance changes with current patch notes.</div>
+<p class="muted" style="font-size:12px">Starter note: this tool intentionally avoids showing unverified damage multipliers.</p>
+</section>
+<script>
+  const attack=document.querySelector("#attack-type"), defend=document.querySelector("#defend-type"), result=document.querySelector("#match-result");
+  document.querySelector("#check-matchup")?.addEventListener("click",()=>{result.textContent=`Selected matchup: ${attack.value} attacking ${defend.value}. Check the current in-game type chart for the authoritative effectiveness and damage value.`;});
+</script>
+</MainLayout>

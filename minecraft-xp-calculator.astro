@@ -1,0 +1,20 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro"; import "../../styles/global.css";
+---
+<MainLayout title="Minecraft XP Calculator" description="Calculate the total Minecraft experience points required to reach a level.">
+<section class="page-hero container"><span class="pill">MINECRAFT TOOL</span><h1>Minecraft XP <span class="gradient-text">Calculator.</span></h1><p class="lead" style="margin:0">Estimate the total experience points needed to reach a target level.</p></section>
+<section class="tool-shell">
+<h2>Experience level calculator</h2>
+<div class="form-row"><div class="field"><label for="current-level">Current level</label><input id="current-level" type="number" min="0" max="21863" value="0"/></div><div class="field"><label for="target-level">Target level</label><input id="target-level" type="number" min="0" max="21863" value="30"/></div></div>
+<button class="button" id="calc-xp">Calculate XP</button><div id="xp-result" class="result" aria-live="polite">Enter your current and target levels.</div>
+<p class="muted" style="font-size:13px">This calculates total level XP using the standard Java-style level progression formula. It does not include partial progress within your current level.</p>
+</section>
+<script>
+  function totalXp(n){if(n<=16)return n*n+6*n;if(n<=31)return Math.floor(2.5*n*n-40.5*n+360);return Math.floor(4.5*n*n-162.5*n+2220);}
+  document.querySelector("#calc-xp")?.addEventListener("click",()=>{
+    const c=Number(document.querySelector("#current-level").value),t=Number(document.querySelector("#target-level").value),out=document.querySelector("#xp-result");
+    if(!Number.isInteger(c)||!Number.isInteger(t)||c<0||t<0||t<c||t>21863){out.textContent="Enter valid levels. Target must be equal to or higher than current level.";return;}
+    out.innerHTML=`<strong>XP needed: ${(totalXp(t)-totalXp(c)).toLocaleString()}</strong><br>Total XP at level ${t}: ${totalXp(t).toLocaleString()}<br>Total XP at level ${c}: ${totalXp(c).toLocaleString()}`;
+  });
+</script>
+</MainLayout>

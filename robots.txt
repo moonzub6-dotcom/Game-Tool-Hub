@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gametoolhub.pages.dev/sitemap.xml

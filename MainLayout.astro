@@ -1,0 +1,41 @@
+---
+const { title = "GameToolHub", description = "Free gaming calculators and useful game tools.", canonical = Astro.url.pathname } = Astro.props;
+const fullTitle = title === "GameToolHub" ? title : `${title} | GameToolHub`;
+const canonicalUrl = new URL(canonical, Astro.site ?? "https://gametoolhub.pages.dev").toString();
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#090b16" />
+    <title>{fullTitle}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="GameToolHub home"><span class="brand-mark">G</span><span>GameTool<span class="brand-accent">Hub</span></span></a>
+      <nav aria-label="Main navigation">
+        <a href="/">Home</a><a href="/games/">Games</a><a href="/#tools">Tools</a><a href="/about/">About</a>
+      </nav>
+      <a class="header-cta" href="/games/">Explore tools <span>↗</span></a>
+    </header>
+    <main><slot /></main>
+    <footer class="site-footer">
+      <div class="footer-top">
+        <a class="brand" href="/"><span class="brand-mark">G</span><span>GameTool<span class="brand-accent">Hub</span></span></a>
+        <p>Useful tools for curious players.</p>
+      </div>
+      <div class="footer-links"><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy-policy/">Privacy Policy</a><a href="/terms/">Terms</a></div>
+      <p class="fine-print">GameToolHub is an independent fan-made project and is not affiliated with or endorsed by any game publisher. Game names are used for identification only.</p>
+      <p class="copyright">© {new Date().getFullYear()} GameToolHub. Built for players.</p>
+    </footer>
+    <script>
+      const menuButton = document.querySelector(".menu-toggle");
+      const nav = document.querySelector(".site-header nav");
+      menuButton?.addEventListener("click", () => nav?.classList.toggle("nav-open"));
+    </script>
+  </body>
+</html>
